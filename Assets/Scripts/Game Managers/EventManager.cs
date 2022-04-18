@@ -8,7 +8,11 @@ public class EventManager : MonoBehaviour
     public delegate void FightEvent(); //Declare the delegate action type
 
     //Declare the type of fight events that other game objects can subscribe to
-    public static event FightEvent RandomFightEvent;
+    public static event FightEvent HealthPodEvent;
+    public static event FightEvent MinionAttackEvent;
+    public static event FightEvent BossBattleEvent;
+
+
 
     //DECLARING AN INSTANCE
     private static EventManager _instance; // make an instance of this class that can be accessed by all the scripts in the scene
@@ -36,15 +40,9 @@ public class EventManager : MonoBehaviour
     //TRACKING STATES
     public bool eventEnded { get; set; } //bool to keep track of when events start and finish so there aren't any bugs
 
-    ////Event to reset the variables
-    //public delegate void EndEvent();
-    //public static event EndEvent ResetFightEventVariables; //This event resets all the variables of all the fight events (enemy health, timers, position, etc.)
 
     private void Awake()
     {
-        //TESTER
-        RandomFightEvent += testFighting;
-        //
         _instance = this; //initialize the instance
     }
     void Start()
@@ -66,25 +64,61 @@ public class EventManager : MonoBehaviour
 
                 if (timeSinceLastEvent <= 0) //when the timer runs out run the code runs
                 {
-                    if (RandomFightEvent != null)
-                    {
+                    
+                    
                         RandomFightEvent(); //Call a random fight event to occur 
 
-                    }
+                    //TEST
+                    testFighting();
+                    
 
                 }
             }
 
             if (eventEnded == true) //Once the event is over, start the timer till the next event again
             {
-                //if (ResetFightEventVariables != null)
-                //{
-                //    ResetFightEventVariables();
-                //}
+
                 eventEnded = false;
                 timeSinceLastEvent = Random.Range(timeBetweenFightEvents - timeOffset, timeBetweenFightEvents);
             }
         }
+
+    }
+
+
+
+    void RandomFightEvent()
+    {
+        int randomEventNumber = Random.Range(0, 3); //Set a random value to the number which will determine which event is called
+
+        if (randomEventNumber == 0)
+        {
+            if (HealthPodEvent != null)
+            {
+                HealthPodEvent();
+            }
+        }
+
+        else if (randomEventNumber == 1)
+        {
+            if (MinionAttackEvent != null)
+            {
+                MinionAttackEvent();
+            }
+        }
+
+        else if (randomEventNumber == 2)
+        {
+            if (BossBattleEvent != null)
+            {
+                BossBattleEvent();
+            }
+        }
+
+        //else if (randomEventNumber == 3)
+        //{
+        //    BossBattleEvent();
+        //}
 
     }
 
@@ -94,3 +128,8 @@ public class EventManager : MonoBehaviour
         Debug.Log("I still work");
     }
 }
+
+
+  
+
+

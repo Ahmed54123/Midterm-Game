@@ -7,77 +7,62 @@ public class FightEvents : MonoBehaviour
     // Start is called before the first frame update
     void OnEnable()
     {
-        ChooseARandomFightEvent();
+        //Subscribe to the corresponded events in Event Manager
+        EventManager.HealthPodEvent += HealthRegenerationPods;
+        EventManager.MinionAttackEvent += MinionsAttack;
+        EventManager.BossBattleEvent += BossBattleSpawn;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(EventManager.Instance.eventEnded == true)
-        {
-            ChooseARandomFightEvent();
-        }
+       
     }
 
     void HealthRegenerationPods()
     {
+        //START EVENT
         Debug.Log("Health Regen Pod has spawned");
 
         //END EVENT
         EventManager.Instance.eventEnded = true; //End the event to reset all variables
-        EventManager.RandomFightEvent -= HealthRegenerationPods;
+        
         
 
     }
 
     void MinionsAttack()
     {
+        //START EVENT
         Debug.Log("Minions have spawned");
 
         //END EVENT
         EventManager.Instance.eventEnded = true; //End the event to reset all variables
-        EventManager.RandomFightEvent -= MinionsAttack;
+        
         
 
     }
 
     void BossBattleSpawn()
     {
+        //START EVENT
         Debug.Log("Boss has appeared");
 
         //END EVENT
         EventManager.Instance.eventEnded = true; //End the event to reset all variables
-        EventManager.RandomFightEvent -= BossBattleSpawn;
+        
         
 
     }
 
-    //Call a random event
-    void ChooseARandomFightEvent()
+    void OnDisable() 
     {
-        int randomEventNumber = Random.Range(0, 3);
-
-        if(randomEventNumber == 0)
-        {
-            EventManager.RandomFightEvent += HealthRegenerationPods;
-        }
-
-      else  if (randomEventNumber == 1)
-        {
-            EventManager.RandomFightEvent += MinionsAttack;
-        }
-
-        else if (randomEventNumber == 2)
-        {
-            EventManager.RandomFightEvent += BossBattleSpawn;
-        }
-
-        else if (randomEventNumber == 3)
-        {
-            EventManager.RandomFightEvent += BossBattleSpawn;
-        }
-
+        //Unsubscribe to the corresponded events in Event Manager to avoid potential errors
+        EventManager.HealthPodEvent -= HealthRegenerationPods;
+        EventManager.MinionAttackEvent -= MinionsAttack;
+        EventManager.BossBattleEvent -= BossBattleSpawn;
     }
 
-    
+
+
 }

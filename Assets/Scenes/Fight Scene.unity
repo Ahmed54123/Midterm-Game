@@ -867,7 +867,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb02679d021266c4f93b9a1acdf0f116, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeBetweenFightEvents: 7
+  timeBetweenFightEvents: 3
   timeOffset: 0
 --- !u!114 &373318785
 MonoBehaviour:
