@@ -736,6 +736,8 @@ GameObject:
   - component: {fileID: 373318781}
   - component: {fileID: 373318782}
   - component: {fileID: 373318783}
+  - component: {fileID: 373318784}
+  - component: {fileID: 373318785}
   m_Layer: 0
   m_Name: Game Manager
   m_TagString: Untagged
@@ -815,7 +817,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fighters:
-  - {fileID: 6468926732740263905, guid: e43c9ba292c56634582fd2ae237b8b74, type: 3}
+  - {fileID: 7008882493854717140, guid: 0564772871514f248948372fe628b5bd, type: 3}
   - {fileID: 7008882493854717140, guid: 0564772871514f248948372fe628b5bd, type: 3}
   - {fileID: 7008882493854717140, guid: 0564772871514f248948372fe628b5bd, type: 3}
   headertext: {fileID: 647991566}
@@ -851,6 +853,32 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 06eb606a89203f944885a120ce56ff96, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &373318784
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 373318778}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb02679d021266c4f93b9a1acdf0f116, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timeBetweenFightEvents: 7
+  timeOffset: 0
+--- !u!114 &373318785
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 373318778}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc9fb84cf5bed9e49926fa897f099c5e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &406434691

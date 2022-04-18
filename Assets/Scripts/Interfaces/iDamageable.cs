@@ -6,5 +6,5 @@ public interface iDamageable //This interface will be implemented on any object 
 {
     int Health { get; set; }
 
-    void Damage();
+    void Damage(int damageTaken);
 }

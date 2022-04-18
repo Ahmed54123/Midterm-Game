@@ -10,6 +10,7 @@ public class TransitionToNextCombo : StateMachineBehaviour
     public string alternativeComboToPlayNext; // Input the alternative move this move can lead to if a different input is pressed
     PlayerController playerRef; //Reference to player object this animator is attached to.
 
+
     //Default combos to play if the move cannot be chained
     string defaultLightAttack = "light Attack 1";
     string defaultHeavyAttack = "Heavy Attack 1";

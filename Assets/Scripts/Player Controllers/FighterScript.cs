@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 using TMPro;
 using UnityEngine.UI;
 
-public class FighterScript : MonoBehaviour
+public class FighterScript : MonoBehaviour, iDamageable
 {
 
     //Variables for controlling stats and damage
@@ -83,19 +83,24 @@ public class FighterScript : MonoBehaviour
        
     }
 
-   public virtual void TakeDamage(int damageTaken)
+   public void Damage(int damageTaken) //Implement this script's own variation of the IDamageable interface
     {
-        _health -= damageTaken;
-        Mathf.Clamp(_health, 0, maxHealth);
+        _health -= damageTaken; //Decrease health by the amount of damage taken
+        Mathf.Clamp(_health, 0, maxHealth); //Keep the health's value in between a specific range
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        iDamageable hit = collision.gameObject.GetComponent<iDamageable>(); //Check if the collision's gameobject implements an IDamageable Interface
         
+        if(hit!= null) //If the object implements an IDamageable interface 
+        {
+            hit.Damage(attackDamage);
+        }
         FighterScript otherPlayer = collision.gameObject.GetComponent<FighterScript>();
         if (otherPlayer != null && otherPlayer.gameObject.name != this.gameObject.name)
         {
-            otherPlayer.TakeDamage(attackDamage); //damage the other player if they have a fighter component and if they do not share the same name as this game Object (to avoid confliction of game object identification)
+           //damage the other player if they have a fighter component and if they do not share the same name as this game Object (to avoid confliction of game object identification)
             
             comboCounter++; //increase the counter everytime the player has hit another player
             

@@ -8,6 +8,15 @@ public class GameManager : MonoBehaviour
     public GameObject playerSelectMenu; //Player select menu that will be activated and deactivated based on if the round has started or not
     public bool hasGameStarted { get; set; }
 
+    bool _gameOver;
+    public bool isGameOver
+    {
+        get
+        {
+            return _gameOver;
+        }
+    }
+
     //GAME MUSIC
     public AudioSource sourceMusic; //Starts playing  music on the game object when the game starts and stops when the fight is over
 
@@ -34,6 +43,7 @@ public class GameManager : MonoBehaviour
     {
         sourceMusic = sourceMusic.GetComponent<AudioSource>();
         hasGameStarted = false;
+        _gameOver = false;
 
         VictoryMenu.SetActive(false);
         playerSelectMenu.SetActive(true);
@@ -66,7 +76,7 @@ public class GameManager : MonoBehaviour
     public void GameOver()
     {
         VictoryMenu.SetActive(true); //set the victory menu to active
-                                     
+        _gameOver = false;                             
         victoryText.text = Winner + " won!"; //set the winner to the winner text game object
         sourceMusic.Stop();
     }
