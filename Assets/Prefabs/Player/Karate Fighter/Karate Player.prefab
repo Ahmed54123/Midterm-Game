@@ -351,7 +351,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7693c4275e04c374f957a78bc96e3d16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
+  _maxHealth: 100
   playerControllerRef: {fileID: 0}
   winnerPlayerTag: {fileID: 3649733715860042860}
 --- !u!70 &1392302414050850566

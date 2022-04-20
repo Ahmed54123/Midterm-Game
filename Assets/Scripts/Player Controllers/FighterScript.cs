@@ -10,8 +10,9 @@ public class FighterScript : MonoBehaviour, iDamageable
 
     //Variables for controlling stats and damage
    int _health;
-   [SerializeField] int maxHealth;
-    public PlayerController playerControllerRef; // Property that will allow child classes to access player stats
+   public int _maxHealth;
+   public int maxHealth { get { return _maxHealth; } } //return the value of the maximum health of character
+   public PlayerController playerControllerRef; // Property that will allow child classes to access player stats
 
    BoxCollider2D thisGameObjectsHitCollider; //Reference to the trigger box collider to set it inactive when the player is not attacking
    [SerializeField] GameObject winnerPlayerTag; //this object will be set inactive if the player dies, so the only player with a tag left will be the winner
@@ -85,8 +86,11 @@ public class FighterScript : MonoBehaviour, iDamageable
 
    public void Damage(int damageTaken) //Implement this script's own variation of the IDamageable interface
     {
-        _health -= damageTaken; //Decrease health by the amount of damage taken
-        Mathf.Clamp(_health, 0, maxHealth); //Keep the health's value in between a specific range
+        if (GameManager.Instance.hasGameStarted == true)
+        {
+            _health -= damageTaken; //Decrease health by the amount of damage taken
+            Mathf.Clamp(_health, 0, maxHealth); //Keep the health's value in between a specific range
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
