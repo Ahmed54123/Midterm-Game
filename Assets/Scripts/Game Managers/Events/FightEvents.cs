@@ -5,6 +5,20 @@ using UnityEngine;
 public class FightEvents : MonoBehaviour
 {
     // Start is called before the first frame update
+
+    //FIGHT EVENT VARIABLES
+
+    [SerializeField] float spawnerXRangeMin;
+    [SerializeField] float spawnerXRangeMax;
+
+    Vector3 spawnArea;
+
+        //Health Event
+             public GameObject healthPodPrefab;
+             
+   
+        
+    
     void OnEnable()
     {
         //Subscribe to the corresponded events in Event Manager
@@ -24,8 +38,11 @@ public class FightEvents : MonoBehaviour
         //START EVENT
         Debug.Log("Health Regen Pod has spawned");
 
-        //END EVENT
-        EventManager.Instance.eventEnded = true; //End the event to reset all variables
+        // Spawn Health Object
+        Instantiate(healthPodPrefab, new Vector3(Random.Range(spawnerXRangeMin, spawnerXRangeMax), 0), Quaternion.identity);
+
+        //END EVENT in health pickup script
+        
         
         
 

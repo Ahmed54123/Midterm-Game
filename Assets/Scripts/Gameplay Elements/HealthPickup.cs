@@ -56,6 +56,8 @@ public class HealthPickup : MonoBehaviour, iDamageable
 
     public void Die()
     {
+        EventManager.Instance.eventEnded = true; //End the event to reset all variables
+
         if (playerHealthFilled == false)
         {
             //Explosion Animation 
@@ -67,12 +69,14 @@ public class HealthPickup : MonoBehaviour, iDamageable
             //Dismantle Animation
             Debug.Log("Dismantled health pod");
 
-            EventManager.Instance.eventEnded = true;
+            
             Destroy(gameObject);
         }
+
+
     }
 
-        private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
         {
         FighterScript playerRef = collision.gameObject.GetComponent<FighterScript>();
         if (playerRef != null)
