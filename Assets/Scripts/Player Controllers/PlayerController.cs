@@ -13,8 +13,10 @@ public class PlayerController : MonoBehaviour
     public LayerMask groundLayer;
 
     float horizontal;
-    public float speed;
-    public float jumpingPower;
+    [SerializeField] float speed;
+    [SerializeField] float jumpingPower;
+    [SerializeField] float groundCheckPointRange;
+    
 
     //bool that tells what direction the player is looking in
     bool isFacingRight = true;
@@ -91,6 +93,15 @@ public class PlayerController : MonoBehaviour
         fighterAnimator.SetBool("isRunning", isRunning); //set the bool in the animator to the value assigned in the script
     }
 
+    //Jumping Mechanics
+    private void OnDrawGizmosSelected()
+    { //Viusally set the attackPoints range and size
+        if (groundCheck == null)
+        {
+            return;
+        }
+        Gizmos.DrawWireSphere(groundCheck.position, groundCheckPointRange);
+    }
     bool isGrounded() //Private method that returns whether the player is on the ground and can jump
     {
         return Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer);
@@ -135,7 +146,7 @@ public class PlayerController : MonoBehaviour
         }
         _typeOfAttack = 1;
 
-        fighterScriptRef.LightAttackFighter();
+        fighterScriptRef.LightAttack();
     }
 
     public void HeavyAttack(InputAction.CallbackContext context)
@@ -146,10 +157,10 @@ public class PlayerController : MonoBehaviour
             
         }
         _typeOfAttack = 2;
-        fighterScriptRef.HeavyAttackFighter();
+        fighterScriptRef.HeavyAttack();
     }
 
-    
+
 }
 
 

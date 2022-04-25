@@ -8,6 +8,7 @@ public class HealthPickup : MonoBehaviour, iDamageable
     public int maxHealth { get { return _maxHealth; } }
     public int Health { get; set; } //Declare health variable for iDamageable
 
+    Animator healthPickupAnimator;
 
     //Health Restoration Variables
     public float healTimeRate; //The time rate that the health will be restored over
@@ -21,6 +22,7 @@ public class HealthPickup : MonoBehaviour, iDamageable
 
     void Start()
     {
+        healthPickupAnimator = gameObject.GetComponent<Animator>();
         isThisPodTaken = false; 
         playerHealthFilled = false;
         Health = maxHealth;
@@ -50,7 +52,7 @@ public class HealthPickup : MonoBehaviour, iDamageable
 
     public void Damage(int damageTaken)
     {
-        Health -= damageTaken;
+        Health = Mathf.Clamp(Health - damageTaken, 0, maxHealth);
 
     }
 
@@ -61,19 +63,21 @@ public class HealthPickup : MonoBehaviour, iDamageable
         if (playerHealthFilled == false)
         {
             //Explosion Animation 
+            healthPickupAnimator.SetTrigger("explode");
             Debug.Log("Exploded Health pod");
         }
 
         else 
         {
             //Dismantle Animation
+            healthPickupAnimator.SetTrigger("dismantle");
             Debug.Log("Dismantled health pod");
 
             
-            Destroy(gameObject);
+           
         }
 
-
+        Destroy(gameObject);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -117,6 +121,8 @@ public class HealthPickup : MonoBehaviour, iDamageable
             }
         }
     }
+
+  
 }
  
 

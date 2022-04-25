@@ -8,18 +8,28 @@ public class FightEvents : MonoBehaviour
 
     //FIGHT EVENT VARIABLES
 
+    //Spawn Points on map
+    //Random Spawn Point Ranges
     [SerializeField] float spawnerXRangeMin;
     [SerializeField] float spawnerXRangeMax;
+
+    //Middle of Arena
+    [SerializeField] float middleSpawnPoint;
+
 
     Vector3 spawnArea;
 
         //Health Event
              public GameObject healthPodPrefab;
+
+
+        //Boss Battle
+             public GameObject bossCharacter;
              
-   
+
         
     
-    void OnEnable()
+    void Start()
     {
         //Subscribe to the corresponded events in Event Manager
         EventManager.HealthPodEvent += HealthRegenerationPods;
@@ -65,9 +75,11 @@ public class FightEvents : MonoBehaviour
         //START EVENT
         Debug.Log("Boss has appeared");
 
-        //END EVENT
-        EventManager.Instance.eventEnded = true; //End the event to reset all variables
-        
+        //Spawn Boss Character
+        Instantiate(bossCharacter, new Vector3(middleSpawnPoint, 0), Quaternion.identity);
+
+
+        //END EVENT        
         
 
     }

@@ -10,4 +10,6 @@ public interface iDamageable //This interface will be implemented on any object 
     void Damage(int damageTaken);
 
     void Die();
+
+    
 }

@@ -17,7 +17,7 @@ public class Boss_Run : StateMachineBehaviour
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
 
-        playerTarget = animator.GetComponent<Enemy>().PlayerTarget;
+        playerTarget = animator.GetComponent<BossScript>().PlayerTarget;
 
         enemyRb = animator.GetComponent<Rigidbody2D>();
 
@@ -32,15 +32,12 @@ public class Boss_Run : StateMachineBehaviour
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
 
-        playerTarget = animator.GetComponent<Enemy>().PlayerTarget; //set the player target to whatever is set in the enemy controller script
-
-
-        Debug.Log(playerTarget + " is the current target");
+        playerTarget = animator.GetComponent<BossScript>().PlayerTarget; //set the player target to whatever is set in the enemy controller script
 
         //Set the enemy to target the player
 
         Vector2 target = new Vector2(playerTarget.position.x, enemyRb.position.y);
-        Vector2 newPos = Vector2.MoveTowards(enemyRb.position, target,animator.GetComponent<Enemy>().Speed * Time.deltaTime);
+        Vector2 newPos = Vector2.MoveTowards(enemyRb.position, target,animator.GetComponent<BossScript>().Speed * Time.deltaTime);
         enemyRb.MovePosition(newPos);
 
        

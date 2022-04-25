@@ -178,26 +178,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5251734368879410063, guid: 1dfdc5ebc6ea5e34a9ad902438abb347, type: 3}
-      propertyPath: m_SortingLayer
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 5251734368879410063, guid: 1dfdc5ebc6ea5e34a9ad902438abb347, type: 3}
-      propertyPath: m_SortingLayerID
-      value: -101276741
-      objectReference: {fileID: 0}
-    - target: {fileID: 5251734368879410063, guid: 1dfdc5ebc6ea5e34a9ad902438abb347, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
-    - target: {fileID: 5251734368879410064, guid: 1dfdc5ebc6ea5e34a9ad902438abb347, type: 3}
-      propertyPath: _speed
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 5251734368879410064, guid: 1dfdc5ebc6ea5e34a9ad902438abb347, type: 3}
-      propertyPath: timeToWaitBeforeSwitchingTargets
-      value: 12
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1dfdc5ebc6ea5e34a9ad902438abb347, type: 3}
 --- !u!1 &475228360
