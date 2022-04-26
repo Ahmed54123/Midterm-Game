@@ -58,7 +58,7 @@ public class HealthPickup : MonoBehaviour, iDamageable
 
     public void Die()
     {
-        EventManager.Instance.eventEnded = true; //End the event to reset all variables
+        EventManager.Instance.CanStartNewEvent(); //End the event to reset all variables
 
         if (playerHealthFilled == false)
         {

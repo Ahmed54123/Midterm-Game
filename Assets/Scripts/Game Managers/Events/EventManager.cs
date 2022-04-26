@@ -38,7 +38,7 @@ public class EventManager : MonoBehaviour
     float timeSinceLastEvent;
 
     //TRACKING STATES
-    public bool eventEnded { get; set; } //bool to keep track of when events start and finish so there aren't any bugs
+    bool canStartEvent; //bool to keep track of when events start and finish so there aren't any bugs
 
 
     private void Awake()
@@ -47,8 +47,9 @@ public class EventManager : MonoBehaviour
     }
     void Start()
     {
-        eventEnded = false;
-        timeSinceLastEvent = Random.Range(timeBetweenFightEvents-timeOffset, timeBetweenFightEvents); //set the timer to a value
+        timeSinceLastEvent = Random.Range(timeBetweenFightEvents - timeOffset, timeBetweenFightEvents);
+        canStartEvent = true;
+        
         
     }
 
@@ -58,15 +59,15 @@ public class EventManager : MonoBehaviour
         if (GameManager.Instance.hasGameStarted == true && GameManager.Instance.isGameOver == false)
         {
 
-            if (eventEnded == false)
+            if (canStartEvent== true)
             {
                 timeSinceLastEvent -= Time.deltaTime;
 
                 if (timeSinceLastEvent <= 0) //when the timer runs out run the code runs
                 {
-                    
-                    
-                        RandomFightEvent(); //Call a random fight event to occur 
+
+                   canStartEvent = false;
+                   RandomFightEvent(); //Call a random fight event to occur 
 
                     //TEST
                     testFighting();
@@ -75,17 +76,16 @@ public class EventManager : MonoBehaviour
                 }
             }
 
-            if (eventEnded == true) //Once the event is over, start the timer till the next event again
-            {
-
-                eventEnded = false;
-                timeSinceLastEvent = Random.Range(timeBetweenFightEvents - timeOffset, timeBetweenFightEvents);
-            }
+       
         }
 
     }
 
-
+    public void CanStartNewEvent() //When an event has ended it will call this function to start a timer before the new one
+    {
+        timeSinceLastEvent = Random.Range(timeBetweenFightEvents - timeOffset, timeBetweenFightEvents);
+        canStartEvent = true;
+    }
 
     void RandomFightEvent()
     {
@@ -125,6 +125,7 @@ public class EventManager : MonoBehaviour
     //Tester to make sure event still runs
     void testFighting()
     {
+        
         Debug.Log("I still work");
     }
 }

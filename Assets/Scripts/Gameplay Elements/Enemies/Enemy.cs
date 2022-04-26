@@ -2,13 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour, iAttackable
+public class Enemy : MonoBehaviour
 {
     //Define Enemy Traits
 
     //HEALTH
-    public int Health { get; set; } //Declare health variable for iDamageable
-    [SerializeField] int _maxHealth;
+    protected int _health;
+    public int Health { get {return _health; } set {_health = value; } } //Declare health variable for iDamageable
+    public int _maxHealth;
     public int maxHealth { get { return _maxHealth; } }
     
 
@@ -36,7 +37,7 @@ public class Enemy : MonoBehaviour, iAttackable
 
     public virtual void Init()
     {
-        Health = maxHealth;
+        _health = maxHealth;
         foreach (GameObject player in GameObject.FindGameObjectsWithTag("Player"))
         {
             playersInGame.Add(player.transform);
@@ -99,11 +100,5 @@ public class Enemy : MonoBehaviour, iAttackable
         }
     }
 
-   public virtual void SwitchPlayerTargetOnCommand()
-    {
-        int playerTargetIndex = Random.Range(0, playersInGame.Count); //Set the enemy's target to a random player
-        playerTargeted = playersInGame[playerTargetIndex];
-    }
-
-    
+ 
 }

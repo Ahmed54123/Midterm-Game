@@ -29,7 +29,7 @@ public class FightEvents : MonoBehaviour
 
         
     
-    void Start()
+    void OnEnable()
     {
         //Subscribe to the corresponded events in Event Manager
         EventManager.HealthPodEvent += HealthRegenerationPods;
@@ -37,12 +37,7 @@ public class FightEvents : MonoBehaviour
         EventManager.BossBattleEvent += BossBattleSpawn;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-       
-    }
-
+   
     void HealthRegenerationPods()
     {
         //START EVENT
@@ -64,9 +59,9 @@ public class FightEvents : MonoBehaviour
         Debug.Log("Minions have spawned");
 
         //END EVENT
-        EventManager.Instance.eventEnded = true; //End the event to reset all variables
-        
-        
+        EventManager.Instance.CanStartNewEvent(); //End the event to reset all variables
+
+
 
     }
 
@@ -84,7 +79,7 @@ public class FightEvents : MonoBehaviour
 
     }
 
-    void OnDisable() 
+    void OnDisable()
     {
         //Unsubscribe to the corresponded events in Event Manager to avoid potential errors
         EventManager.HealthPodEvent -= HealthRegenerationPods;

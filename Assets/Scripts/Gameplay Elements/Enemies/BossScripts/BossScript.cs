@@ -4,9 +4,14 @@ using UnityEngine;
 
 public class BossScript : Enemy, iDamageable, iAttackable
 {
+   [SerializeField] ShootLaser laserShooting;
+    
+    
     private void Update()
     {
-        if(Health<= 0)
+       
+
+        if(_health<= 0)
         {
             Die();
         }
@@ -18,26 +23,25 @@ public class BossScript : Enemy, iDamageable, iAttackable
         {
             Debug.Log("Enemy health is " + Health);
             //Decrease health by the amount of damage taken
-            Health = Mathf.Clamp(Health - damageTaken, 0, maxHealth); //Keep the health's value in between a specific range
+            _health = Mathf.Clamp(Health - damageTaken, 0, maxHealth); //Keep the health's value in between a specific range
         }
     }
 
-    public virtual void Die()
+    public void Die()
     {
         //Place this in update to constantly monitor Enemy Health
-        EventManager.Instance.eventEnded = true; //End the event to reset all variables
+        EventManager.Instance.CanStartNewEvent(); //End the event to reset all variables
 
         gameObject.GetComponent<Animator>().SetTrigger("Die");
         Debug.Log("EnemyDied");
         Destroy(gameObject);
 
     }
-    public void ShootLasers()
+    
+
+    public void BossShootLaser()
     {
-
-
-
+        laserShooting.GetComponent<ShootLaser>().isShooting = true;
     }
-
 
 }
