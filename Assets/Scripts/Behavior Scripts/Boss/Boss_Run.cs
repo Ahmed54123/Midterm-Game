@@ -11,7 +11,8 @@ public class Boss_Run : StateMachineBehaviour
 
     
     Rigidbody2D enemyRb; //Reference to enemy's rigidbody
-    
+
+    BossScript boss;
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -21,11 +22,9 @@ public class Boss_Run : StateMachineBehaviour
 
         enemyRb = animator.GetComponent<Rigidbody2D>();
 
-        
+        boss = animator.GetComponent<BossScript>();
 
-        
-
-        
+        boss.BossShootLaser();
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
@@ -34,19 +33,23 @@ public class Boss_Run : StateMachineBehaviour
 
         playerTarget = animator.GetComponent<BossScript>().PlayerTarget; //set the player target to whatever is set in the enemy controller script
 
+        boss.LookAtPlayer();
         //Set the enemy to target the player
 
         Vector2 target = new Vector2(playerTarget.position.x, enemyRb.position.y);
-        Vector2 newPos = Vector2.MoveTowards(enemyRb.position, target,animator.GetComponent<BossScript>().Speed * Time.deltaTime);
+        Vector2 newPos = Vector2.MoveTowards(enemyRb.position, target,animator.GetComponent<BossScript>().Speed * Time.fixedDeltaTime);
         enemyRb.MovePosition(newPos);
 
-       
+      if(Vector2.Distance(playerTarget.position, enemyRb.position)<= boss.AttackRange)
+        {
+            animator.SetTrigger("Attack");
+        }
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-
+        animator.ResetTrigger("Attack");
     }
 
 

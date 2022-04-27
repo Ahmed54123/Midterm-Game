@@ -257,7 +257,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b523a7a15b0a4c4dae323aa67d65cab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  howMuchDamageDoesThisMoveDo: 5
+  howMuchDamageDoesThisMoveDo: 3
 --- !u!114 &-5196668196351801327
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -406,7 +406,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b523a7a15b0a4c4dae323aa67d65cab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  howMuchDamageDoesThisMoveDo: 19
+  howMuchDamageDoesThisMoveDo: 12
 --- !u!1101 &-2375068092338366855
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -819,7 +819,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b523a7a15b0a4c4dae323aa67d65cab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  howMuchDamageDoesThisMoveDo: 20
+  howMuchDamageDoesThisMoveDo: 2
 --- !u!1102 &1681791214992672005
 AnimatorState:
   serializedVersion: 6
@@ -885,7 +885,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b523a7a15b0a4c4dae323aa67d65cab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  howMuchDamageDoesThisMoveDo: 8
+  howMuchDamageDoesThisMoveDo: 6
 --- !u!1101 &2856117928577742865
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -1007,7 +1007,7 @@ AnimatorStateMachine:
     m_Position: {x: 1660, y: 130, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 6910593005941910455}
-    m_Position: {x: -50, y: 200, z: 0}
+    m_Position: {x: -60, y: 200, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 759856360061776912}
     m_Position: {x: -50, y: 110, z: 0}
@@ -1042,7 +1042,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b523a7a15b0a4c4dae323aa67d65cab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  howMuchDamageDoesThisMoveDo: 5
+  howMuchDamageDoesThisMoveDo: 4
 --- !u!114 &4631302105355339112
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1270,7 +1270,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b523a7a15b0a4c4dae323aa67d65cab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  howMuchDamageDoesThisMoveDo: 7
+  howMuchDamageDoesThisMoveDo: 4
 --- !u!114 &8748464243432673637
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1283,7 +1283,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b523a7a15b0a4c4dae323aa67d65cab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  howMuchDamageDoesThisMoveDo: 21
+  howMuchDamageDoesThisMoveDo: 6
 --- !u!1101 &8820559643027154083
 AnimatorStateTransition:
   m_ObjectHideFlags: 1

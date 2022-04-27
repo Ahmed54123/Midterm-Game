@@ -41,7 +41,8 @@ public class FighterScript : MonoBehaviour, iDamageable, iAttackable
     }
     public int attackDamage { get; set; } //the animator will set the damage based on what kind of attack and what stage of the combo the player is in
     public int comboCounter { get; set; } //the animator will increase the combo counter as the chain progresses
-    
+
+    public bool isInvunerable { get; set; }
 
     void Start()
     {
@@ -50,8 +51,8 @@ public class FighterScript : MonoBehaviour, iDamageable, iAttackable
         _health = maxHealth; // set the player's health to max at the start of the game
 
         HealthBar = GameObject.Find(playerControllerRef.name + " Health bar").GetComponent<Slider>(); //Set the healthbar of this player to the corresponding health bar and get the game object's slider component
-        
 
+        isInvunerable = false;
     }
 
     // Update is called once per frame
@@ -81,8 +82,15 @@ public class FighterScript : MonoBehaviour, iDamageable, iAttackable
     {
         if (GameManager.Instance.hasGameStarted == true)
         {
-            //Decrease health by the amount of damage taken
-           _health= Mathf.Clamp(_health - damageTaken, 0, maxHealth); //Keep the health's value in between a specific range
+            if (isInvunerable == false)
+            {
+                
+                //Decrease health by the amount of damage taken
+                _health = Mathf.Clamp(_health - damageTaken, 0, maxHealth); //Keep the health's value in between a specific range
+
+                //Make the player go into a hit state where they are invunerable and cannot chain thier current combo
+                gameObject.GetComponent<Animator>().SetTrigger("Hit");
+            }
         }
     }
 

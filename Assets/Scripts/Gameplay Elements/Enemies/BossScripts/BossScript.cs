@@ -27,6 +27,10 @@ public class BossScript : Enemy, iDamageable, iAttackable
         }
     }
 
+    public void BossAttack()
+    {
+        gameObject.GetComponent<iAttackable>().Attack(attackPoint,attackRange, this.gameObject, attackDamage);
+    }
     public void Die()
     {
         //Place this in update to constantly monitor Enemy Health

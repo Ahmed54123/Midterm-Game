@@ -21,6 +21,9 @@ public class Enemy : MonoBehaviour
     //Attack Variables
     [SerializeField] protected Transform attackPoint; //The point the overlap circle will be drawn
     [SerializeField] protected float attackRange = 0.5f;
+    [SerializeField] protected int attackDamage;
+
+    public float AttackRange { get { return attackRange; } }
 
 
     //Timers for waiting for couratine
@@ -34,6 +37,8 @@ public class Enemy : MonoBehaviour
 
    protected Transform playerTargeted;
     public Transform PlayerTarget { get { return playerTargeted; } }
+
+    bool isFlipped = false;
 
     public virtual void Init()
     {
@@ -100,5 +105,23 @@ public class Enemy : MonoBehaviour
         }
     }
 
- 
+    public void LookAtPlayer()
+    {
+        Vector3 flipped = transform.localScale;
+        flipped.z *= -1f;
+
+        if(transform.position.x > playerTargeted.position.x && isFlipped)
+        {
+            transform.localScale = flipped;
+            transform.Rotate(0f, 180f, 0f);
+            isFlipped = false;
+        }
+
+        else if(transform.position.x< playerTargeted.position.x && !isFlipped)
+        {
+            transform.localScale = flipped;
+            transform.Rotate(0f, 180f, 0f);
+            isFlipped = true;
+        }
+    }
 }

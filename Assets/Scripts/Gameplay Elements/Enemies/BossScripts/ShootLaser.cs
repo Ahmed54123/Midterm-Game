@@ -7,12 +7,17 @@ public class ShootLaser : MonoBehaviour
     LineRenderer line;
     [SerializeField] ParticleSystem laserStartParticles;
     [SerializeField] ParticleSystem laserEndParticles;
-    [SerializeField] float lineLength = 10f;
+
+    [SerializeField] int laserAttackDamage;
+    public float lineLength  { get;set; } //Set the line length //Enemy 
+    [SerializeField] Transform raycastStartPoint;
 
     bool startParticlesPlaying = false;
     bool endParticlesPlaying = false;
     RaycastHit2D hit;
     public bool isShooting { get; set; }
+
+    [SerializeField] GameObject parentMainGameObject; //make sure the laser isnt colliding with this object
     // Start is called before the first frame update
     void Start()
     {
@@ -24,11 +29,10 @@ public class ShootLaser : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(isShooting == true)
-        {
+        
             if (isShooting == true)
             {
-                ShootLasers();
+                ShootLasers(laserAttackDamage);
             }
 
 
@@ -41,10 +45,10 @@ public class ShootLaser : MonoBehaviour
                 laserStartParticles.Stop(true);
                 line.enabled = false;
             }
-        }
+        
     }
 
-    public void ShootLasers()
+    public void ShootLasers(int amountToDamage)
     {
         isShooting = true;
 
@@ -54,10 +58,10 @@ public class ShootLaser : MonoBehaviour
             laserStartParticles.Play(true);
         }
 
-        laserStartParticles.gameObject.transform.position = transform.position;
+        laserStartParticles.gameObject.transform.position = raycastStartPoint.position;
         line.enabled = true;
 
-        hit = Physics2D.Raycast(transform.position, Vector2.right, lineLength);
+        RaycastHit2D hit = Physics2D.Raycast(raycastStartPoint.position, Vector2.up, 300);
         if (hit)
         {
             if (endParticlesPlaying == false)
@@ -66,14 +70,19 @@ public class ShootLaser : MonoBehaviour
                 laserEndParticles.Play(true);
             }
 
+            if(hit.collider.gameObject.GetComponent<iDamageable>() != null && hit.collider.gameObject != parentMainGameObject.gameObject) //make sure the hit isnt on this same game object before taking action
+            {
+                hit.collider.gameObject.GetComponent<iDamageable>().Damage(amountToDamage);
+            }
+
             laserEndParticles.gameObject.transform.position = hit.point;
-            float distance = ((Vector2)hit.point - (Vector2)transform.position).magnitude;
+            float distance = ((Vector2)hit.point - (Vector2)raycastStartPoint.position).magnitude;
             line.SetPosition(1, new Vector3(distance, 0, 0));
         }
 
         else
         {
-            line.SetPosition(1, new Vector3(lineLength, 0, 0));
+            line.SetPosition(1, new Vector3(250, 0, 0));
             endParticlesPlaying = false;
             laserEndParticles.Stop(true);
         }
