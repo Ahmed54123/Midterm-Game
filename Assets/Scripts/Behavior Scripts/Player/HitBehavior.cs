@@ -13,6 +13,7 @@ public class HitBehavior : StateMachineBehaviour
         fighterRef = animator.GetComponent<FighterScript>();
 
         playerRef.isAttacking = false; //End the player's stream of combos
+        playerRef.isAttacking = true;
         fighterRef.isInvunerable = true; //make the player invunerable to attacks while this is active
         fighterRef.comboCounter = 0;
     }
@@ -22,6 +23,7 @@ public class HitBehavior : StateMachineBehaviour
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        animator.GetComponent<SpriteRenderer>().color = Color.white;
         fighterRef.isInvunerable = false;
     }
 }

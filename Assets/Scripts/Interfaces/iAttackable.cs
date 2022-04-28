@@ -11,7 +11,7 @@ using UnityEngine;
         //Damage them
         foreach (Collider2D hit in hitObjects)
         {
-            if (hit != thisGameObject.GetComponent<Collider2D>()) //If the object attacked is not this gameObject's colldier, damage it
+            if (hit.gameObject != thisGameObject.gameObject) //If the object attacked is not this gameObject's colldier, damage it
             {
                 iDamageable hitDamage = hit.gameObject.GetComponent<iDamageable>();
                 if (hitDamage != null)

@@ -25,9 +25,9 @@ public class EventManager : MonoBehaviour
             return _instance; //referenced from https://medium.com/nerd-for-tech/implementing-a-game-manager-using-the-singleton-pattern-unity-eb614b9b1a74
         }
     }
-    
 
-   
+
+
 
     //Declaring Timer and Bool Variables
 
@@ -49,8 +49,8 @@ public class EventManager : MonoBehaviour
     {
         timeSinceLastEvent = Random.Range(timeBetweenFightEvents - timeOffset, timeBetweenFightEvents);
         canStartEvent = true;
-        
-        
+
+
     }
 
     // Update is called once per frame
@@ -59,24 +59,23 @@ public class EventManager : MonoBehaviour
         if (GameManager.Instance.hasGameStarted == true && GameManager.Instance.isGameOver == false)
         {
 
-            if (canStartEvent== true)
+            if (canStartEvent == true)
             {
                 timeSinceLastEvent -= Time.deltaTime;
 
                 if (timeSinceLastEvent <= 0) //when the timer runs out run the code runs
                 {
 
-                   canStartEvent = false;
-                   RandomFightEvent(); //Call a random fight event to occur 
+                    canStartEvent = false;
+                    RandomFightEvent(); //Call a random fight event to occur 
 
-                    //TEST
-                    testFighting();
-                    
+
+
 
                 }
             }
 
-       
+
         }
 
     }
@@ -115,19 +114,9 @@ public class EventManager : MonoBehaviour
             }
         }
 
-        //else if (randomEventNumber == 3)
-        //{
-        //    BossBattleEvent();
-        //}
-
     }
 
-    //Tester to make sure event still runs
-    void testFighting()
-    {
-        
-        Debug.Log("I still work");
-    }
+
 }
 
 

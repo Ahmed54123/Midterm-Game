@@ -115,6 +115,22 @@ public class Enemy : MonoBehaviour
         }
     }
 
+    protected void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.GetComponent<FighterScript>() != null)
+        {
+            for (int playerNumber = 0; playerNumber < playersInGame.Count; playerNumber++) //Iterate through the length of how many slots are available in tne transform, then iterate through the players in the game and add them to the array
+            {
+                if (collision.gameObject == playersInGame[playerNumber].gameObject)
+                {
+                    playerTargeted = playersInGame[playerNumber];
+                }
+
+            }
+        }
+
+    }
+
     public void LookAtPlayer()
     {
         Vector3 flipped = transform.localScale;

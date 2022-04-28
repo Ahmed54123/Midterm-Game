@@ -94,6 +94,20 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
+--- !u!114 &-7211374316936334366
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b523a7a15b0a4c4dae323aa67d65cab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  howMuchDamageDoesThisMoveDo: 4
+  whatTypeOfMoveIsThis: 1
 --- !u!1101 &-7115283047281392276
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -245,19 +259,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86e6f0875a91fd043b08e6a8af3d7c2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &-5415096134725763110
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0b523a7a15b0a4c4dae323aa67d65cab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  howMuchDamageDoesThisMoveDo: 3
 --- !u!114 &-5196668196351801327
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -287,6 +288,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   howMuchDamageDoesThisMoveDo: 7
+  whatTypeOfMoveIsThis: 2
 --- !u!1102 &-4255360385331672372
 AnimatorState:
   serializedVersion: 6
@@ -330,7 +332,7 @@ AnimatorState:
   - {fileID: -1710113873057765341}
   m_StateMachineBehaviours:
   - {fileID: 4631302105355339112}
-  - {fileID: 1387356524603601562}
+  - {fileID: -3727703725803690494}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -367,6 +369,20 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
+--- !u!114 &-3727703725803690494
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b523a7a15b0a4c4dae323aa67d65cab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  howMuchDamageDoesThisMoveDo: 3
+  whatTypeOfMoveIsThis: 1
 --- !u!1102 &-3076740801560630924
 AnimatorState:
   serializedVersion: 6
@@ -407,6 +423,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   howMuchDamageDoesThisMoveDo: 12
+  whatTypeOfMoveIsThis: 1
 --- !u!1101 &-2375068092338366855
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -798,7 +815,7 @@ AnimatorState:
   - {fileID: -1181560779183323388}
   m_StateMachineBehaviours:
   - {fileID: -6175894226595252756}
-  - {fileID: -5415096134725763110}
+  - {fileID: -7211374316936334366}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -813,19 +830,6 @@ AnimatorState:
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
---- !u!114 &1387356524603601562
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0b523a7a15b0a4c4dae323aa67d65cab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  howMuchDamageDoesThisMoveDo: 2
 --- !u!1102 &1681791214992672005
 AnimatorState:
   serializedVersion: 6
@@ -892,6 +896,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   howMuchDamageDoesThisMoveDo: 6
+  whatTypeOfMoveIsThis: 2
 --- !u!1101 &2856117928577742865
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -1103,6 +1108,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   howMuchDamageDoesThisMoveDo: 4
+  whatTypeOfMoveIsThis: 1
 --- !u!114 &4631302105355339112
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1368,6 +1374,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   howMuchDamageDoesThisMoveDo: 4
+  whatTypeOfMoveIsThis: 2
 --- !u!114 &8748464243432673637
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1381,6 +1388,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   howMuchDamageDoesThisMoveDo: 6
+  whatTypeOfMoveIsThis: 1
 --- !u!1101 &8820559643027154083
 AnimatorStateTransition:
   m_ObjectHideFlags: 1

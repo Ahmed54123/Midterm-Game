@@ -44,6 +44,8 @@ public class FighterScript : MonoBehaviour, iDamageable, iAttackable
     public int comboCounter { get; set; } //the animator will increase the combo counter as the chain progresses
 
     public bool isInvunerable { get; set; }
+    [SerializeField] float timeInvunerable;
+    float timer;
 
     void Start()
     {
@@ -60,6 +62,7 @@ public class FighterScript : MonoBehaviour, iDamageable, iAttackable
         HealthBar.value = _health;
 
         isInvunerable = false;
+        timer = timeInvunerable;
     }
 
     // Update is called once per frame
@@ -71,7 +74,17 @@ public class FighterScript : MonoBehaviour, iDamageable, iAttackable
 
             HealthBar.value = _health;
 
-
+            if(isInvunerable == true)
+            {
+                timer -= Time.deltaTime;
+                if (timer <= 0)
+                {
+                    timer = timeInvunerable;
+                    isInvunerable = false;
+                    gameObject.GetComponent<SpriteRenderer>().color = Color.white;
+                    isInvunerable = false;
+                }
+            }
 
             if (_health <= 0)
             {
@@ -88,26 +101,30 @@ public class FighterScript : MonoBehaviour, iDamageable, iAttackable
             {
                 if (isInvunerable == false)
                 {
-                
+                    //Make the player go into a hit state where they are invunerable and cannot chain thier current combo
+                    gameObject.GetComponent<SpriteRenderer>().color = Color.red;
+                    playerControllerRef.isAttacking = false; //End the player's stream of combos
+                    isInvunerable = true;
+
                     //Decrease health by the amount of damage taken
                     _health = Mathf.Clamp(_health - damageTaken, 0, maxHealth); //Keep the health's value in between a specific range
 
-                    //Make the player go into a hit state where they are invunerable and cannot chain thier current combo
-                    gameObject.GetComponent<Animator>().SetTrigger("Hit");
+                    
+                   
                 }
             }
         }
 
 
-        public void LightAttack()
+        public void LightAttack(int moveDamage)
         {
-            gameObject.GetComponent<iAttackable>().Attack(attackPoint, attackRange, this.gameObject, attackDamage);
+            gameObject.GetComponent<iAttackable>().Attack(attackPoint, attackRange, this.gameObject, moveDamage);
 
         }
 
-        public void HeavyAttack()
+        public void HeavyAttack(int moveDamage)
         {
-            gameObject.GetComponent<iAttackable>().Attack(attackPoint, attackRange, this.gameObject, attackDamage);
+            gameObject.GetComponent<iAttackable>().Attack(attackPoint, attackRange, this.gameObject, moveDamage);
 
         }
         //functions to be called in the player controller

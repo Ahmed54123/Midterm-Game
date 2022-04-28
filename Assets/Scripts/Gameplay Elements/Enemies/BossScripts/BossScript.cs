@@ -10,20 +10,34 @@ public class BossScript : Enemy, iDamageable, iAttackable
     [SerializeField] string[] bossStates;
 
     [SerializeField] float timeToWaitBeforeSwitchingStates;
-    
 
+    bool damagedColored; //set the amount of time the player becomes colored for
+    [SerializeField] float timeColored;
+    float timer;
     private void Awake()
     {
         GameManager.Instance.CharacterSpawned(gameObject); //add this character to the list of characters alive
 
-        gameObject.name = "Samurai Bot";
+        gameObject.name = "Wraith-K5";
 
         whatBossStateToBeIn = bossStates[0];
         StartCoroutine(SwitchBossState());
+
+        damagedColored = false;
+        timer = timeColored;
     }
     private void Update()
     {
-       
+        if (damagedColored)
+        {
+            timer -= Time.deltaTime;
+            if(timer<= 0)
+            {
+                gameObject.GetComponent<SpriteRenderer>().color = Color.white;
+                timer = timeColored;
+                damagedColored = false;
+            }
+        }
 
         if(_health<= 0)
         {
@@ -35,9 +49,13 @@ public class BossScript : Enemy, iDamageable, iAttackable
     {
         if (GameManager.Instance.hasGameStarted == true)
         {
+            gameObject.GetComponent<SpriteRenderer>().color = Color.black;
+            damagedColored = true;
+
             Debug.Log("Enemy health is " + Health);
             //Decrease health by the amount of damage taken
             _health = Mathf.Clamp(Health - damageTaken, 0, maxHealth); //Keep the health's value in between a specific range
+
         }
     }
 
@@ -70,7 +88,8 @@ public class BossScript : Enemy, iDamageable, iAttackable
         Destroy(gameObject);
 
     }
-    
+
+   
 
     //Shooting laser functions
     public void BossShootLaser()

@@ -19,7 +19,8 @@ public class HealthPickup : MonoBehaviour, iDamageable
 
     bool playerHealthFilled; //Check whether the player's health was restored or this object was destroyed
 
-
+    List<GameObject> playersInHealthPod = new List<GameObject>(); //get a list of all the players in the pod, if there is more than one, push the second player out
+    [SerializeField] Transform playerKickoutArea;
     void Start()
     {
         healthPickupAnimator = gameObject.GetComponent<Animator>();
@@ -85,13 +86,21 @@ public class HealthPickup : MonoBehaviour, iDamageable
         FighterScript playerRef = collision.gameObject.GetComponent<FighterScript>();
         if (playerRef != null)
         {
-            
-            isThisPodTaken = true;
-            foreach (CapsuleCollider2D cc2d in gameObject.GetComponents<CapsuleCollider2D>()) //Get each capsule collider component and set it to true when the player enters the field
+            playersInHealthPod.Add(collision.gameObject);
+
+            if (playersInHealthPod.Count >= 2)
             {
-                cc2d.enabled = true;
+                collision.gameObject.transform.position = playerKickoutArea.transform.position;
             }
 
+            else if (playersInHealthPod.Count < 2)
+            {
+                isThisPodTaken = true;
+                foreach (CapsuleCollider2D cc2d in gameObject.GetComponents<CapsuleCollider2D>()) //Get each capsule collider component and set it to true when the player enters the field
+                {
+                    cc2d.enabled = true;
+                }
+            }
 
             StartCoroutine(AddHealth(collision.gameObject.GetComponent<iDamageable>()));
 

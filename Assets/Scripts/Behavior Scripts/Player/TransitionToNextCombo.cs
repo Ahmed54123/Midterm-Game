@@ -20,17 +20,8 @@ public class TransitionToNextCombo : StateMachineBehaviour
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         fighterScriptRef = animator.GetComponent<FighterScript>();
-        
 
-        if (whatTypeOfMoveIsThis == 1)
-        {
-            fighterScriptRef.LightAttack();
-        }
-
-        if (whatTypeOfMoveIsThis == 2)
-        {
-            fighterScriptRef.HeavyAttack();
-        }
+      
     }
 
     //OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks

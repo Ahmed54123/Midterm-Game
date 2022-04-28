@@ -14,13 +14,15 @@ public class FightEvents : MonoBehaviour
     [SerializeField] float spawnerXRangeMax;
 
     //Middle of Arena
-    [SerializeField] float middleSpawnPoint;
+    [SerializeField] Transform middleSpawnPoint;
 
 
-    Vector3 spawnArea;
+    [SerializeField] Transform healthPodMinSpawn;
+    [SerializeField] Transform healthPodMaxSpawn;
 
-        //Health Event
-             public GameObject healthPodPrefab;
+
+    //Health Event
+    public GameObject healthPodPrefab;
 
 
         //Boss Battle
@@ -44,7 +46,7 @@ public class FightEvents : MonoBehaviour
         Debug.Log("Health Regen Pod has spawned");
 
         // Spawn Health Object
-        Instantiate(healthPodPrefab, new Vector3(Random.Range(spawnerXRangeMin, spawnerXRangeMax), 0), Quaternion.identity);
+        Instantiate(healthPodPrefab, new Vector3(Random.Range(healthPodMinSpawn.position.x, healthPodMaxSpawn.position.x), 0), Quaternion.identity);
 
         //END EVENT in health pickup script
         
@@ -71,7 +73,7 @@ public class FightEvents : MonoBehaviour
         Debug.Log("Boss has appeared");
 
         //Spawn Boss Character
-        Instantiate(bossCharacter, new Vector3(middleSpawnPoint, 0), Quaternion.identity);
+        Instantiate(bossCharacter, new Vector3(middleSpawnPoint.position.x, 0), Quaternion.identity);
 
 
         //END EVENT        

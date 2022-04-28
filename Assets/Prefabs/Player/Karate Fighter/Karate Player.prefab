@@ -329,6 +329,7 @@ MonoBehaviour:
   playerControllerRef: {fileID: 0}
   attackPoint: {fileID: 1911150570268155788}
   attackRange: 0.64
+  timeInvunerable: 0.2
 --- !u!70 &1392302414050850566
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

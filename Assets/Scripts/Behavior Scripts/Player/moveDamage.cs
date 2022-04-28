@@ -6,12 +6,23 @@ public class moveDamage : StateMachineBehaviour
 {
     //Fighter Script references
     FighterScript fighterReference;
-    public int howMuchDamageDoesThisMoveDo;
+    [SerializeField] int howMuchDamageDoesThisMoveDo;
 
+    [SerializeField] int whatTypeOfMoveIsThis;
+    
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        DamageOtherPlayer(animator);
+        fighterReference = animator.GetComponent<FighterScript>();
+        if (whatTypeOfMoveIsThis == 1)
+        {
+            fighterReference.LightAttack(howMuchDamageDoesThisMoveDo);
+        }
+
+        if (whatTypeOfMoveIsThis == 2)
+        {
+            fighterReference.HeavyAttack(howMuchDamageDoesThisMoveDo);
+        }
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
@@ -27,12 +38,6 @@ public class moveDamage : StateMachineBehaviour
     }
 
 
-    void DamageOtherPlayer(Animator animator)
-    {
-        fighterReference = animator.GetComponent<FighterScript>();
-        fighterReference.attackDamage = howMuchDamageDoesThisMoveDo; //set the damage of this move in the game object's fighter script
-        
-       
-    }
+    
 
 }
