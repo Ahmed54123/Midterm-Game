@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2220137278478859784}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.41, y: 0.11, z: 0}
+  m_LocalPosition: {x: -1.3, y: 0.06, z: 0}
   m_LocalScale: {x: 0.51392746, y: 0.51392746, z: 0.51392746}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -55,7 +55,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5077913843864419533}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.83, y: 0.07, z: 0.019944264}
+  m_LocalPosition: {x: -1.22, y: 0.15, z: 0.019944264}
   m_LocalScale: {x: 0.51392746, y: 0.51392746, z: 0.51392746}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -185,7 +185,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 10
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 0
@@ -193,7 +193,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 4
+  m_Constraints: 6
 --- !u!61 &5251734368879410067
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -232,14 +232,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36fa87bff4a859c44ae738425ed2bd76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxHealth: 200
+  _maxHealth: 130
   _speed: 2
   attackPoint: {fileID: 3500782521250542041}
-  attackRange: 1.87
-  attackDamage: 15
-  timeToWaitBeforeSwitchingTargets: 12
-  timerOffset: 2
+  attackRange: 2.53
+  attackDamage: 12
+  timeToWaitBeforeSwitchingTargets: 11
+  timerOffset: 4
   laserShooting: {fileID: 9044297997911884547}
+  bossStates:
+  - Attack
+  - Shoot Laser
+  timeToWaitBeforeSwitchingStates: 7
 --- !u!1001 &8643166833051447463
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -391,6 +395,9 @@ MonoBehaviour:
   laserEndParticles: {fileID: 7224853062645296}
   laserAttackDamage: 10
   raycastStartPoint: {fileID: 2410435054928054440}
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 7927
   parentMainGameObject: {fileID: 5251734368879410060}
 --- !u!198 &7224853062645296 stripped
 ParticleSystem:

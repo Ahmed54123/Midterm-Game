@@ -9,10 +9,12 @@ public class Boss_Run : StateMachineBehaviour
     //Variables to call random player in Enemy Script coroutine
     Transform playerTarget;
 
-    
+
     Rigidbody2D enemyRb; //Reference to enemy's rigidbody
 
     BossScript boss;
+
+
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -24,25 +26,39 @@ public class Boss_Run : StateMachineBehaviour
 
         boss = animator.GetComponent<BossScript>();
 
-        boss.BossShootLaser();
+
+
+
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-
-        playerTarget = animator.GetComponent<BossScript>().PlayerTarget; //set the player target to whatever is set in the enemy controller script
-
-        boss.LookAtPlayer();
-        //Set the enemy to target the player
-
-        Vector2 target = new Vector2(playerTarget.position.x, enemyRb.position.y);
-        Vector2 newPos = Vector2.MoveTowards(enemyRb.position, target,animator.GetComponent<BossScript>().Speed * Time.fixedDeltaTime);
-        enemyRb.MovePosition(newPos);
-
-      if(Vector2.Distance(playerTarget.position, enemyRb.position)<= boss.AttackRange)
+        if (GameManager.Instance.isGameOver == false)
         {
-            animator.SetTrigger("Attack");
+            playerTarget = animator.GetComponent<BossScript>().PlayerTarget; //set the player target to whatever is set in the enemy controller script
+
+            boss.LookAtPlayer();
+            //Set the enemy to target the player
+
+            Vector2 target = new Vector2(playerTarget.position.x, enemyRb.position.y);
+            Vector2 newPos = Vector2.MoveTowards(enemyRb.position, target, animator.GetComponent<BossScript>().Speed * Time.fixedDeltaTime);
+            enemyRb.MovePosition(newPos);
+
+            if (boss.whatBossStateToBeIn == "Attack") //If the boss should attack stay in this script
+            {
+                if (Vector2.Distance(playerTarget.position, enemyRb.position) <= boss.AttackRange)
+                {
+                    animator.SetTrigger("Attack");
+                }
+            }
+
+
+
+            else if (boss.whatBossStateToBeIn == "Shoot Laser")
+            {
+                animator.Play("Shoot_Laser");
+            }
         }
     }
 
@@ -51,9 +67,9 @@ public class Boss_Run : StateMachineBehaviour
     {
         animator.ResetTrigger("Attack");
     }
-
-
 }
+
+
 
 
 

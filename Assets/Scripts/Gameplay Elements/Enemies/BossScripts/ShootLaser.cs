@@ -11,6 +11,7 @@ public class ShootLaser : MonoBehaviour
     [SerializeField] int laserAttackDamage;
     public float lineLength  { get;set; } //Set the line length //Enemy 
     [SerializeField] Transform raycastStartPoint;
+    [SerializeField] LayerMask layerMask; //Layers for ryacast to ignore
 
     bool startParticlesPlaying = false;
     bool endParticlesPlaying = false;
@@ -38,7 +39,7 @@ public class ShootLaser : MonoBehaviour
 
             else if (isShooting == false)
             {
-                line.SetPosition(1, new Vector3(lineLength, 0, 0));
+                line.SetPosition(1, new Vector3(0, 0, 0));
                 endParticlesPlaying = false;
                 laserEndParticles.Stop(true);
                 startParticlesPlaying = false;
@@ -50,7 +51,7 @@ public class ShootLaser : MonoBehaviour
 
     public void ShootLasers(int amountToDamage)
     {
-        isShooting = true;
+        
 
         if (startParticlesPlaying == false)
         {
@@ -61,7 +62,7 @@ public class ShootLaser : MonoBehaviour
         laserStartParticles.gameObject.transform.position = raycastStartPoint.position;
         line.enabled = true;
 
-        RaycastHit2D hit = Physics2D.Raycast(raycastStartPoint.position, Vector2.up, 300);
+        RaycastHit2D hit = Physics2D.Raycast(parentMainGameObject.transform.position, transform.right, 300, layerMask);
         if (hit)
         {
             if (endParticlesPlaying == false)
@@ -75,8 +76,8 @@ public class ShootLaser : MonoBehaviour
                 hit.collider.gameObject.GetComponent<iDamageable>().Damage(amountToDamage);
             }
 
-            laserEndParticles.gameObject.transform.position = hit.point;
-            float distance = ((Vector2)hit.point - (Vector2)raycastStartPoint.position).magnitude;
+            laserEndParticles.gameObject.transform.position = hit.collider.gameObject.transform.position;
+            float distance = ((Vector2)hit.collider.gameObject.transform.position - (Vector2)raycastStartPoint.position).magnitude;
             line.SetPosition(1, new Vector3(distance, 0, 0));
         }
 

@@ -57,10 +57,16 @@ public class Enemy : MonoBehaviour
         //Manage the players' positions continuously
         for (int playerNumber = 0; playerNumber < playersInGame.Count; playerNumber++) //Iterate through the length of how many slots are available in tne transform, then iterate through the players in the game and add them to the array
         {
+            if (GameObject.FindGameObjectsWithTag("Player")[playerNumber].GetComponent<FighterScript>().isDead == false)
+            {
+                playersInGame[playerNumber] = GameObject.FindGameObjectsWithTag("Player")[playerNumber].GetComponent<Transform>(); //If the player isnt dead, add them to the list
+            }
+            
 
-            playersInGame[playerNumber] = GameObject.FindGameObjectsWithTag("Player")[playerNumber].GetComponent<Transform>();
-
-
+            else if(GameObject.FindGameObjectsWithTag("Player")[playerNumber].GetComponent<FighterScript>().isDead == true)
+            {
+                playersInGame.Remove(playersInGame[playerNumber]); // if the player found is dead, remove them from the list
+            }
 
 
         }
@@ -69,15 +75,17 @@ public class Enemy : MonoBehaviour
     }
     void Start()
     {
+
         Init();
     }
 
     // Update is called once per frame
    void Update()
     {
-
-        UpdateFunc();
-       
+        if (GameManager.Instance.isGameOver == false)
+        {
+            UpdateFunc();
+        }
     }
 
     private void OnDrawGizmosSelected()
@@ -94,6 +102,8 @@ public class Enemy : MonoBehaviour
     {
         while (true)
         { // loops forever...
+
+            
             int playerTargetIndex =Random.Range(0, playersInGame.Count); //Set the enemy's target to a random player
             playerTargeted = playersInGame[playerTargetIndex];
 

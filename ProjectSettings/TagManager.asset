@@ -13,12 +13,12 @@ TagManager:
   - Water
   - UI
   - Ground
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Player
+  - Enemy
+  - Laser
+  - Obstacle
+  - Prop
+  - DeadLayer
   - 
   - 
   - 

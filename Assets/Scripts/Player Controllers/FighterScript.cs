@@ -9,22 +9,23 @@ public class FighterScript : MonoBehaviour, iDamageable, iAttackable
 {
 
     //Variables for controlling stats and damage
-   int _health;
-   [SerializeField] int _maxHealth;
-   public int maxHealth { get { return _maxHealth; } } //return the value of the maximum health of character
-   public PlayerController playerControllerRef; // Property that will allow child classes to access player stats
+    int _health;
+    [SerializeField] int _maxHealth;
+    public int maxHealth { get { return _maxHealth; } } //return the value of the maximum health of character
+    public PlayerController playerControllerRef; // Property that will allow child classes to access player stats
 
     //ATTACK VARIABLES
     [SerializeField] Transform attackPoint; //The point the overlap circle will be drawn
     [SerializeField] float attackRange = 0.5f;
 
-   [SerializeField] GameObject winnerPlayerTag; //this object will be set inactive if the player dies, so the only player with a tag left will be the winner
+    
 
-    bool isDead = false; //Keeps track of if the player has died
+    public bool isDead { get; set; } //Keeps track of if the player has died
 
     //Variables that will control the character's UI elements
     Slider HealthBar; //This slider will be fed the player's health
-    
+
+   
 
     //UI Elements and References
     public int Health
@@ -46,11 +47,17 @@ public class FighterScript : MonoBehaviour, iDamageable, iAttackable
 
     void Start()
     {
+        isDead = false; //the player is alive
         playerControllerRef = gameObject.GetComponent<PlayerController>();
 
+        GameManager.Instance.CharacterSpawned(gameObject); //add this character to the list of characters alive
+
         _health = maxHealth; // set the player's health to max at the start of the game
+        
 
         HealthBar = GameObject.Find(playerControllerRef.name + " Health bar").GetComponent<Slider>(); //Set the healthbar of this player to the corresponding health bar and get the game object's slider component
+        HealthBar.maxValue = maxHealth;
+        HealthBar.value = _health;
 
         isInvunerable = false;
     }
@@ -66,70 +73,69 @@ public class FighterScript : MonoBehaviour, iDamageable, iAttackable
 
 
 
-            Die();
-
-            if (GameObject.FindGameObjectsWithTag("Winner").Length < 2 && isDead == false) 
+            if (_health <= 0)
             {
-                GameManager.Instance.Winner = this.gameObject.name; //If there is only one winner game object in the scene after the game was started this game object becomes a winner
-                GameManager.Instance.GameOver();
-            }
-        }
 
-       
+                Die();
+            }
+
+        }
     }
 
-   public void Damage(int damageTaken) //Implement this script's own variation of the IDamageable interface
-    {
-        if (GameManager.Instance.hasGameStarted == true)
+        public void Damage(int damageTaken) //Implement this script's own variation of the IDamageable interface
         {
-            if (isInvunerable == false)
+            if (GameManager.Instance.hasGameStarted == true)
             {
+                if (isInvunerable == false)
+                {
                 
-                //Decrease health by the amount of damage taken
-                _health = Mathf.Clamp(_health - damageTaken, 0, maxHealth); //Keep the health's value in between a specific range
+                    //Decrease health by the amount of damage taken
+                    _health = Mathf.Clamp(_health - damageTaken, 0, maxHealth); //Keep the health's value in between a specific range
 
-                //Make the player go into a hit state where they are invunerable and cannot chain thier current combo
-                gameObject.GetComponent<Animator>().SetTrigger("Hit");
+                    //Make the player go into a hit state where they are invunerable and cannot chain thier current combo
+                    gameObject.GetComponent<Animator>().SetTrigger("Hit");
+                }
             }
         }
-    }
-
-   
-    public void LightAttack()
-    {
-        gameObject.GetComponent<iAttackable>().Attack(attackPoint, attackRange, this.gameObject, attackDamage);
-
-    }
-
-    public void HeavyAttack()
-    {
-        gameObject.GetComponent<iAttackable>().Attack(attackPoint, attackRange, this.gameObject, attackDamage);
-
-    }
-    //functions to be called in the player controller
 
 
-
-    private void OnDrawGizmosSelected()
-    { //Viusally set the attackPoints range and size
-        if(attackPoint == null) 
+        public void LightAttack()
         {
-            return;
+            gameObject.GetComponent<iAttackable>().Attack(attackPoint, attackRange, this.gameObject, attackDamage);
+
         }
-        Gizmos.DrawWireSphere(attackPoint.position, attackRange);
-    }
 
-    public void Die()
-    {
-        if (_health <= 0)
+        public void HeavyAttack()
         {
+            gameObject.GetComponent<iAttackable>().Attack(attackPoint, attackRange, this.gameObject, attackDamage);
+
+        }
+        //functions to be called in the player controller
+
+
+
+        private void OnDrawGizmosSelected()
+        { //Viusally set the attackPoints range and size
+            if (attackPoint == null)
+            {
+                return;
+            }
+            Gizmos.DrawWireSphere(attackPoint.position, attackRange);
+        }
+
+        public void Die()
+        {
+
             isDead = true;
+            GameManager.Instance.CharacterDied(gameObject);
             //Play death animation
-            winnerPlayerTag.SetActive(false);
+            
             gameObject.GetComponent<PlayerInput>().enabled = false; //The player cannot move after they are defeated
+            gameObject.GetComponent<Rigidbody2D>().isKinematic = true;
+            gameObject.GetComponent<Collider2D>().enabled = false;
         }
+
+
+
     }
 
-   
-    
-}

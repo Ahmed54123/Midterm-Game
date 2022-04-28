@@ -5,8 +5,22 @@ using UnityEngine;
 public class BossScript : Enemy, iDamageable, iAttackable
 {
    [SerializeField] ShootLaser laserShooting;
+
+    public string whatBossStateToBeIn { get; set; } //Set a random boss state and assign it to the animator
+    [SerializeField] string[] bossStates;
+
+    [SerializeField] float timeToWaitBeforeSwitchingStates;
     
-    
+
+    private void Awake()
+    {
+        GameManager.Instance.CharacterSpawned(gameObject); //add this character to the list of characters alive
+
+        gameObject.name = "Samurai Bot";
+
+        whatBossStateToBeIn = bossStates[0];
+        StartCoroutine(SwitchBossState());
+    }
     private void Update()
     {
        
@@ -27,6 +41,19 @@ public class BossScript : Enemy, iDamageable, iAttackable
         }
     }
 
+    //SET A RANDOM ANIMATOR STATE
+    public IEnumerator SwitchBossState()
+    {
+        while (true)
+        {
+            whatBossStateToBeIn = bossStates[Random.Range(0, bossStates.Length)];
+
+            Debug.Log(whatBossStateToBeIn);
+
+            yield return new WaitForSeconds(timeToWaitBeforeSwitchingStates);
+        }
+    }
+
     public void BossAttack()
     {
         gameObject.GetComponent<iAttackable>().Attack(attackPoint,attackRange, this.gameObject, attackDamage);
@@ -35,6 +62,8 @@ public class BossScript : Enemy, iDamageable, iAttackable
     {
         //Place this in update to constantly monitor Enemy Health
         EventManager.Instance.CanStartNewEvent(); //End the event to reset all variables
+        GameManager.Instance.CharacterDied(gameObject); //remove this character to the list when it dies
+
 
         gameObject.GetComponent<Animator>().SetTrigger("Die");
         Debug.Log("EnemyDied");
@@ -43,9 +72,15 @@ public class BossScript : Enemy, iDamageable, iAttackable
     }
     
 
+    //Shooting laser functions
     public void BossShootLaser()
     {
         laserShooting.GetComponent<ShootLaser>().isShooting = true;
+    }
+
+    public void StopShootLaser()
+    {
+        laserShooting.GetComponent<ShootLaser>().isShooting = false;
     }
 
 }

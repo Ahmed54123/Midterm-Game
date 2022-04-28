@@ -146,7 +146,7 @@ public class PlayerController : MonoBehaviour
         }
         _typeOfAttack = 1;
 
-        fighterScriptRef.LightAttack();
+
     }
 
     public void HeavyAttack(InputAction.CallbackContext context)
@@ -157,7 +157,7 @@ public class PlayerController : MonoBehaviour
             
         }
         _typeOfAttack = 2;
-        fighterScriptRef.HeavyAttack();
+        
     }
 
 

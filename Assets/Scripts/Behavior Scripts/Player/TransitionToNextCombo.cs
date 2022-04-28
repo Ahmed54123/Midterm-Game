@@ -20,6 +20,7 @@ public class TransitionToNextCombo : StateMachineBehaviour
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         fighterScriptRef = animator.GetComponent<FighterScript>();
+        
 
         if (whatTypeOfMoveIsThis == 1)
         {
