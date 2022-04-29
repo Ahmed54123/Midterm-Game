@@ -29,7 +29,7 @@ public class Minion_Run : StateMachineBehaviour
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        playerTarget = animator.GetComponent<BossScript>().PlayerTarget; //set the player target to whatever is set in the enemy controller script
+        playerTarget = animator.GetComponent<MinionScript>().PlayerTarget; //set the player target to whatever is set in the enemy controller script
 
         minion.LookAtPlayer();
         //Set the enemy to target the player

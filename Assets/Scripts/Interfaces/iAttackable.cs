@@ -17,6 +17,7 @@ using UnityEngine;
                 if (hitDamage != null)
                 {
                     hitDamage.Damage(attackDamage);
+                    
                 }
             }
         }

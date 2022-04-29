@@ -122,7 +122,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -329,6 +329,9 @@ MonoBehaviour:
   playerControllerRef: {fileID: 0}
   attackPoint: {fileID: 1911150570268155788}
   attackRange: 0.64
+  fullHealthColor: {r: 0, g: 1, b: 0, a: 1}
+  midHealthColor: {r: 1, g: 0.5803922, b: 0, a: 1}
+  lowHealthColor: {r: 1, g: 0.019607844, b: 0, a: 1}
   timeInvunerable: 0.2
 --- !u!70 &1392302414050850566
 CapsuleCollider2D:

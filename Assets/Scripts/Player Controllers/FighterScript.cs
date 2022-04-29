@@ -24,8 +24,15 @@ public class FighterScript : MonoBehaviour, iDamageable, iAttackable
 
     //Variables that will control the character's UI elements
     Slider HealthBar; //This slider will be fed the player's health
+    Image healthbarSlider;
+    Image healthbarBackground;
+    [SerializeField] Color fullHealthColor;
+    [SerializeField] Color midHealthColor;
+    [SerializeField] Color lowHealthColor;
 
-   
+
+
+
 
     //UI Elements and References
     public int Health
@@ -55,11 +62,13 @@ public class FighterScript : MonoBehaviour, iDamageable, iAttackable
         GameManager.Instance.CharacterSpawned(gameObject); //add this character to the list of characters alive
 
         _health = maxHealth; // set the player's health to max at the start of the game
-        
 
+        
         HealthBar = GameObject.Find(playerControllerRef.name + " Health bar").GetComponent<Slider>(); //Set the healthbar of this player to the corresponding health bar and get the game object's slider component
         HealthBar.maxValue = maxHealth;
         HealthBar.value = _health;
+        healthbarSlider = GameObject.Find(playerControllerRef.name + " Fill").GetComponent<Image>();
+        healthbarBackground = GameObject.Find(playerControllerRef.name + " Border").GetComponent<Image>();
 
         isInvunerable = false;
         timer = timeInvunerable;
@@ -74,13 +83,35 @@ public class FighterScript : MonoBehaviour, iDamageable, iAttackable
 
             HealthBar.value = _health;
 
-            if(isInvunerable == true)
+            //Set healthbar color depending on health
+            if (_health > maxHealth / 2)
+            {
+                healthbarSlider.color = fullHealthColor;
+                healthbarBackground.color = fullHealthColor;
+            }
+
+            else if (_health <= maxHealth / 2 && _health > maxHealth / 3)
+            {
+                healthbarSlider.color = midHealthColor;
+                healthbarBackground.color = midHealthColor;
+            }
+
+            else if (_health <= maxHealth / 3)
+            {
+                {
+                    healthbarSlider.color = lowHealthColor;
+                    healthbarBackground.color = lowHealthColor;
+                }
+
+            }
+
+            if (isInvunerable == true)
             {
                 timer -= Time.deltaTime;
                 if (timer <= 0)
                 {
                     timer = timeInvunerable;
-                    isInvunerable = false;
+                    
                     gameObject.GetComponent<SpriteRenderer>().color = Color.white;
                     isInvunerable = false;
                 }
@@ -103,7 +134,7 @@ public class FighterScript : MonoBehaviour, iDamageable, iAttackable
                 {
                     //Make the player go into a hit state where they are invunerable and cannot chain thier current combo
                     gameObject.GetComponent<SpriteRenderer>().color = Color.red;
-                    playerControllerRef.isAttacking = false; //End the player's stream of combos
+                    
                     isInvunerable = true;
 
                     //Decrease health by the amount of damage taken
@@ -114,6 +145,25 @@ public class FighterScript : MonoBehaviour, iDamageable, iAttackable
                 }
             }
         }
+
+    public void Heal(int healAmount)
+    {
+        if (GameManager.Instance.hasGameStarted == true)
+        {
+            
+                //Make the player go into a hit state where they are invunerable and cannot chain thier current combo
+                gameObject.GetComponent<SpriteRenderer>().color = Color.green;
+
+               
+
+                //Decrease health by the amount of damage taken
+                _health = Mathf.Clamp(_health + healAmount, 0, maxHealth); //Keep the health's value in between a specific range
+
+            isInvunerable = true;
+
+            
+        }
+    }
 
 
         public void LightAttack(int moveDamage)

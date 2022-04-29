@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 2858279367222759663}
   - component: {fileID: 4497522367194797377}
   - component: {fileID: 4368945746973378452}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Minion
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -102,7 +102,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2695ef1a1e6a72e4bbd52e9fc63c169d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxHealth: 50
+  _maxHealth: 100
   _speed: 1.7
   attackPoint: {fileID: 5322770619267374479}
   attackRange: 0.47
@@ -130,7 +130,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!61 &2858279367222759663
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -170,8 +170,8 @@ CapsuleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.01044178, y: 0}
-  m_Size: {x: 2.1436648, y: 3.018762}
+  m_Offset: {x: 0.049188614, y: 0.42621422}
+  m_Size: {x: 2.3244834, y: 2.3244834}
   m_Direction: 0
 --- !u!95 &4368945746973378452
 Animator:
@@ -202,7 +202,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5322770619267374479}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: attack point
   m_TagString: Untagged
   m_Icon: {fileID: 0}

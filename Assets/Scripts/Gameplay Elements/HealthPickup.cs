@@ -61,6 +61,11 @@ public class HealthPickup : MonoBehaviour, iDamageable
     {
         EventManager.Instance.CanStartNewEvent(); //End the event to reset all variables
 
+        foreach (GameObject player in GameObject.FindGameObjectsWithTag("Player"))
+        {
+            player.gameObject.GetComponent<SpriteRenderer>().color = Color.white; //reset all the players' color to white so there arent any green leftovere
+        }
+
         if (playerHealthFilled == false)
         {
             //Explosion Animation 
@@ -102,23 +107,21 @@ public class HealthPickup : MonoBehaviour, iDamageable
                 }
             }
 
-            StartCoroutine(AddHealth(collision.gameObject.GetComponent<iDamageable>()));
+            StartCoroutine(AddHealth(collision.gameObject.GetComponent<FighterScript>()));
 
          
         }
     }
 
-    IEnumerator AddHealth(iDamageable playerHealth)
+    IEnumerator AddHealth(FighterScript playerHealth)
     {
         while (true)
         { // loops forever...
             if (playerHealth.Health < playerHealth.maxHealth)
             { // if health < 100...
-                playerHealth.Damage(-healRate); // increase health and wait the specified time
+                playerHealth.Heal(healRate); // increase health and wait the specified time
 
-                //TESTER
-                Debug.Log(playerHealth.Health);
-                //TESTER
+              
 
                 yield return new WaitForSeconds(healTimeRate);
             }

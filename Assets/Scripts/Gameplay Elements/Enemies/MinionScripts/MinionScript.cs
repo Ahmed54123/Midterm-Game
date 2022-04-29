@@ -64,11 +64,4 @@ public class MinionScript : Enemy, iDamageable, iAttackable
         gameObject.GetComponent<iAttackable>().Attack(attackPoint, attackRange, this.gameObject, attackDamage);
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if(collision.GetComponent<FighterScript>() != null)
-        {
-            playerTargeted = collision.gameObject.transform; //if the player gets close to the minion they will attack them
-        }
-    }
 }
