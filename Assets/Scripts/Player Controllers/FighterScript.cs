@@ -25,7 +25,6 @@ public class FighterScript : MonoBehaviour, iDamageable, iAttackable
     //Variables that will control the character's UI elements
     Slider HealthBar; //This slider will be fed the player's health
     Image healthbarSlider;
-    Image healthbarBackground;
     [SerializeField] Color fullHealthColor;
     [SerializeField] Color midHealthColor;
     [SerializeField] Color lowHealthColor;
@@ -68,7 +67,7 @@ public class FighterScript : MonoBehaviour, iDamageable, iAttackable
         HealthBar.maxValue = maxHealth;
         HealthBar.value = _health;
         healthbarSlider = GameObject.Find(playerControllerRef.name + " Fill").GetComponent<Image>();
-        healthbarBackground = GameObject.Find(playerControllerRef.name + " Border").GetComponent<Image>();
+        
 
         isInvunerable = false;
         timer = timeInvunerable;
@@ -87,20 +86,18 @@ public class FighterScript : MonoBehaviour, iDamageable, iAttackable
             if (_health > maxHealth / 2)
             {
                 healthbarSlider.color = fullHealthColor;
-                healthbarBackground.color = fullHealthColor;
+                
             }
 
             else if (_health <= maxHealth / 2 && _health > maxHealth / 3)
             {
                 healthbarSlider.color = midHealthColor;
-                healthbarBackground.color = midHealthColor;
             }
 
             else if (_health <= maxHealth / 3)
             {
                 {
                     healthbarSlider.color = lowHealthColor;
-                    healthbarBackground.color = lowHealthColor;
                 }
 
             }
@@ -151,10 +148,7 @@ public class FighterScript : MonoBehaviour, iDamageable, iAttackable
         if (GameManager.Instance.hasGameStarted == true)
         {
             
-                //Make the player go into a hit state where they are invunerable and cannot chain thier current combo
-                gameObject.GetComponent<SpriteRenderer>().color = Color.green;
-
-               
+              
 
                 //Decrease health by the amount of damage taken
                 _health = Mathf.Clamp(_health + healAmount, 0, maxHealth); //Keep the health's value in between a specific range

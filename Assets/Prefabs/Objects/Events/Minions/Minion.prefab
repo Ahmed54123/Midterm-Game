@@ -110,6 +110,9 @@ MonoBehaviour:
   timeToWaitBeforeSwitchingTargets: 4
   timerOffset: 1
   timeColored: 0.2
+  projectilePrefab: {fileID: 2932611510355742967, guid: b9a0efe385e25494b9ffeb75e0e3474d, type: 3}
+  projectileForce: 300
+  projectileShootRate: 2
 --- !u!50 &8553200364432675182
 Rigidbody2D:
   serializedVersion: 4
@@ -118,7 +121,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3971870731693479371}
-  m_BodyType: 0
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0

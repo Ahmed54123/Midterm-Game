@@ -165,9 +165,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fbc223d388a7adb4fa1d5f8fa61ed02f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxHealth: 20
+  _maxHealth: 45
   healTimeRate: 1
-  healRate: 2
+  healRate: 6
   playerKickoutArea: {fileID: 4076897584318871846}
 --- !u!70 &4421183875194983989
 CapsuleCollider2D:

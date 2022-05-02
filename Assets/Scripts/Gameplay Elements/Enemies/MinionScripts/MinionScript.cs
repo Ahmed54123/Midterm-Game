@@ -7,13 +7,28 @@ public class MinionScript : Enemy, iDamageable, iAttackable
     bool damagedColored; //set the amount of time the player becomes colored for
     [SerializeField] float timeColored;
     float timer;
-    // Start is called before the first frame update
-    void Start()
+
+
+    //PROJECTILE SETTINGS
+    [SerializeField] GameObject projectilePrefab;
+    [SerializeField] float projectileForce;
+    [SerializeField] float projectileShootRate;
+
+    public bool isNearPlayer { get; set; } //Only shoot bullets if enemy is not near player
+
+    void Awake()
     {
         damagedColored = false;
         timer = timeColored;
+        isNearPlayer = false;
+
+        StartCoroutine(ShootBullets());
+       
     }
 
+    
+
+    
     // Update is called once per frame
     void Update()
     {
@@ -28,10 +43,12 @@ public class MinionScript : Enemy, iDamageable, iAttackable
             }
         }
 
+        
         if (_health <= 0)
         {
             Die();
         }
+
     }
 
     public void Damage(int damageTaken) //Implement this script's own variation of the IDamageable interface
@@ -62,6 +79,31 @@ public class MinionScript : Enemy, iDamageable, iAttackable
     public void MinionAttack()
     {
         gameObject.GetComponent<iAttackable>().Attack(attackPoint, attackRange, this.gameObject, attackDamage);
+    }
+
+    void LaunchProjectile()
+    {
+        GameObject projectileObject = Instantiate(projectilePrefab, transform.right, Quaternion.identity);
+        Projectile projectileRef = projectileObject.GetComponent<Projectile>();
+        Vector2 directionPlayer = (this.gameObject.transform.position-playerTargeted.position).normalized;
+
+        projectileRef.Launch(directionPlayer , projectileForce);
+
+    }
+
+    IEnumerator ShootBullets()
+    {
+
+        while (true)
+        {
+            if (isNearPlayer == false)
+            {
+                LaunchProjectile();
+            }
+
+            yield return new WaitForSeconds(projectileShootRate); //wait before trying to shoot again
+        }
+        
     }
 
 }

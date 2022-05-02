@@ -19,7 +19,7 @@ TagManager:
   - Obstacle
   - Prop
   - DeadLayer
-  - 
+  - Projectile
   - 
   - 
   - 
@@ -44,6 +44,9 @@ TagManager:
     locked: 0
   - name: Background
     uniqueID: 2298342973
+    locked: 0
+  - name: Sun
+    uniqueID: 2469879295
     locked: 0
   - name: MidGround
     uniqueID: 1531561127

@@ -61,11 +61,7 @@ public class HealthPickup : MonoBehaviour, iDamageable
     {
         EventManager.Instance.CanStartNewEvent(); //End the event to reset all variables
 
-        foreach (GameObject player in GameObject.FindGameObjectsWithTag("Player"))
-        {
-            player.gameObject.GetComponent<SpriteRenderer>().color = Color.white; //reset all the players' color to white so there arent any green leftovere
-        }
-
+      
         if (playerHealthFilled == false)
         {
             //Explosion Animation 

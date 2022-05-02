@@ -37,12 +37,22 @@ public class Minion_Run : StateMachineBehaviour
         Vector2 target = new Vector2(playerTarget.position.x, minionRb.position.y);
         Vector2 newPos = Vector2.MoveTowards(minionRb.position, target, -1* animator.GetComponent<MinionScript>().Speed * Time.fixedDeltaTime);
         minionRb.MovePosition(newPos);
+        
 
-       
-            if (Vector2.Distance(playerTarget.position, minionRb.position) <= minion.AttackRange)
-            {
-                animator.SetTrigger("Attack");
-            }
+
+        if (Vector2.Distance(playerTarget.position, minionRb.position) <= minion.AttackRange)
+        {
+            animator.SetTrigger("Attack");
+
+            minion.isNearPlayer = true;
+        }
+
+        else if (Vector2.Distance(playerTarget.position, minionRb.position) > minion.AttackRange)
+        {
+            minion.isNearPlayer = false;
+        }
+
+           
         
     }
 
@@ -52,5 +62,5 @@ public class Minion_Run : StateMachineBehaviour
         animator.ResetTrigger("Attack");
     }
 
-
+    
 }
