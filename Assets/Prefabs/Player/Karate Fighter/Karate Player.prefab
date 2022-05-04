@@ -325,7 +325,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7693c4275e04c374f957a78bc96e3d16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxHealth: 175
+  _maxHealth: 250
   playerControllerRef: {fileID: 0}
   attackPoint: {fileID: 1911150570268155788}
   attackRange: 0.64

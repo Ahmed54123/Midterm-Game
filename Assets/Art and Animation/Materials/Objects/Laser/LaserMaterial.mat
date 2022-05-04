@@ -61,7 +61,7 @@ Material:
     - _NoiseScale: 21.29
     - _NoiseStrength: 0.23
     m_Colors:
-    - _Color: {r: 2.79544, g: 1.2733157, b: 1.2733157, a: 1}
+    - _Color: {r: 4, g: 0.4534906, b: 0, a: 1}
     - _Flip: {r: 1, g: 1, b: 1, a: 1}
     - _LaserTextureSpeed: {r: -3, g: 0, b: 0, a: 0}
     - _NoiseSpeed: {r: -1.49, g: -0.6, b: 0, a: 0}

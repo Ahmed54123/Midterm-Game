@@ -46,7 +46,7 @@ public class FightEvents : MonoBehaviour
         Debug.Log("Health Regen Pod has spawned");
 
         // Spawn Health Object
-        Instantiate(healthPodPrefab, new Vector3(Random.Range(healthPodMinSpawn.position.x, healthPodMaxSpawn.position.x), 0), Quaternion.identity);
+        Instantiate(healthPodPrefab, new Vector3(Random.Range(healthPodMinSpawn.position.x, healthPodMaxSpawn.position.x), middleSpawnPoint.position.y), Quaternion.identity);
 
         //END EVENT in health pickup script
         
@@ -73,11 +73,13 @@ public class FightEvents : MonoBehaviour
         Debug.Log("Boss has appeared");
 
         //Spawn Boss Character
-        Instantiate(bossCharacter, new Vector3(middleSpawnPoint.position.x, 0), Quaternion.identity);
+
+       GameObject bossSpawned =  Instantiate(bossCharacter, new Vector3(middleSpawnPoint.position.x, middleSpawnPoint.position.y), Quaternion.identity);
+        bossSpawned.GetComponent<Animator>().SetTrigger("Intro");
 
 
         //END EVENT        
-        
+
 
     }
 

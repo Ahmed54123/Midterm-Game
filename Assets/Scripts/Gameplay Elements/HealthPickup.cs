@@ -21,6 +21,8 @@ public class HealthPickup : MonoBehaviour, iDamageable
 
     List<GameObject> playersInHealthPod = new List<GameObject>(); //get a list of all the players in the pod, if there is more than one, push the second player out
     [SerializeField] Transform playerKickoutArea;
+
+    bool entryAnimation = false;
     void Start()
     {
         healthPickupAnimator = gameObject.GetComponent<Animator>();
@@ -79,33 +81,39 @@ public class HealthPickup : MonoBehaviour, iDamageable
            
         }
 
-        Destroy(gameObject);
+        destroyGameObject();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
         {
-        FighterScript playerRef = collision.gameObject.GetComponent<FighterScript>();
-        if (playerRef != null)
+
+        if (entryAnimation == true)
         {
-            playersInHealthPod.Add(collision.gameObject);
 
-            if (playersInHealthPod.Count >= 2)
+            FighterScript playerRef = collision.gameObject.GetComponent<FighterScript>();
+            if (playerRef != null)
             {
-                collision.gameObject.transform.position = playerKickoutArea.transform.position;
-            }
+                playersInHealthPod.Add(collision.gameObject);
 
-            else if (playersInHealthPod.Count < 2)
-            {
-                isThisPodTaken = true;
-                foreach (CapsuleCollider2D cc2d in gameObject.GetComponents<CapsuleCollider2D>()) //Get each capsule collider component and set it to true when the player enters the field
+                if (playersInHealthPod.Count >= 2)
                 {
-                    cc2d.enabled = true;
+                    collision.gameObject.transform.position = playerKickoutArea.transform.position;
                 }
+
+                else if (playersInHealthPod.Count < 2)
+                {
+                    healthPickupAnimator.SetTrigger("Fill Health");
+                    isThisPodTaken = true;
+                    foreach (CapsuleCollider2D cc2d in gameObject.GetComponents<CapsuleCollider2D>()) //Get each capsule collider component and set it to true when the player enters the field
+                    {
+                        cc2d.enabled = true;
+                    }
+                }
+
+                StartCoroutine(AddHealth(collision.gameObject.GetComponent<FighterScript>()));
+
+
             }
-
-            StartCoroutine(AddHealth(collision.gameObject.GetComponent<FighterScript>()));
-
-         
         }
     }
 
@@ -130,7 +138,15 @@ public class HealthPickup : MonoBehaviour, iDamageable
         }
     }
 
-  
+    public void EntryOver()
+    {
+        entryAnimation = true;
+    }
+
+    public void destroyGameObject()
+    {
+        Destroy(gameObject);
+    }
 }
  
 

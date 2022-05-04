@@ -45,9 +45,6 @@ TagManager:
   - name: Background
     uniqueID: 2298342973
     locked: 0
-  - name: Sun
-    uniqueID: 2469879295
-    locked: 0
   - name: MidGround
     uniqueID: 1531561127
     locked: 0
@@ -59,4 +56,7 @@ TagManager:
     locked: 0
   - name: Effects2
     uniqueID: 3440199105
+    locked: 0
+  - name: Fog
+    uniqueID: 3322740977
     locked: 0

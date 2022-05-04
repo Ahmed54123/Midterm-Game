@@ -19,12 +19,15 @@ public class BossScript : Enemy, iDamageable, iAttackable
         GameManager.Instance.CharacterSpawned(gameObject); //add this character to the list of characters alive
 
         gameObject.name = "Wraith-K5";
+        
 
         whatBossStateToBeIn = bossStates[0];
         StartCoroutine(SwitchBossState());
 
         damagedColored = false;
         timer = timeColored;
+
+        gameObject.GetComponent<Animator>().SetTrigger("Intro");
     }
     private void Update()
     {

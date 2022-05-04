@@ -88,7 +88,7 @@ public class EventManager : MonoBehaviour
 
     void RandomFightEvent()
     {
-        int randomEventNumber = Random.Range(0, 3); //Set a random value to the number which will determine which event is called
+        int randomEventNumber = Random.Range(0, 2); //Set a random value to the number which will determine which event is called
 
         if (randomEventNumber == 0)
         {
@@ -100,17 +100,18 @@ public class EventManager : MonoBehaviour
 
         else if (randomEventNumber == 1)
         {
-            if (MinionAttackEvent != null)
+            if (BossBattleEvent != null)
             {
-                MinionAttackEvent();
+                BossBattleEvent();
             }
+            
         }
 
         else if (randomEventNumber == 2)
         {
-            if (BossBattleEvent != null)
+            if (MinionAttackEvent != null)
             {
-                BossBattleEvent();
+                MinionAttackEvent();
             }
         }
 

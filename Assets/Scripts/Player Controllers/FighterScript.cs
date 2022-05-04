@@ -53,6 +53,7 @@ public class FighterScript : MonoBehaviour, iDamageable, iAttackable
     [SerializeField] float timeInvunerable;
     float timer;
 
+
     void Start()
     {
         isDead = false; //the player is alive
@@ -114,7 +115,7 @@ public class FighterScript : MonoBehaviour, iDamageable, iAttackable
                 }
             }
 
-            if (_health <= 0)
+            if (_health <= 0 && isDead == false)
             {
 
                 Die();
@@ -189,7 +190,8 @@ public class FighterScript : MonoBehaviour, iDamageable, iAttackable
 
             isDead = true;
             GameManager.Instance.CharacterDied(gameObject);
-            //Play death animation
+        //Play death animation
+         gameObject.GetComponent<Animator>().SetTrigger("Die");
             
             gameObject.GetComponent<PlayerInput>().enabled = false; //The player cannot move after they are defeated
             gameObject.GetComponent<Rigidbody2D>().isKinematic = true;
